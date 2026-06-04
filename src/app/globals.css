@@ -1,49 +1,69 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Her (Movie) Warm Palette */
+  --color-her-pink: #ff6b81;
+  --color-her-peach: #ff7f50;
+  --color-her-red: #ff4757;
+  
+  /* Van Gogh Night Sky Palette */
+  --color-gogh-dark: #0f141e;
+  --color-gogh-blue: #1e3799;
+  --color-gogh-yellow: #feca57;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Amélie Vintage / Polaroid */
+  --color-amelie-cream: #fdfbf7;
+  --color-amelie-green: #10ac84;
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-background: var(--color-gogh-dark);
+  --color-text: #ffffff;
+  
+  /* Fonts */
+  --font-primary: var(--font-outfit), sans-serif;
+  --font-romantic: var(--font-dancing-script), cursive;
+  --font-vintage: var(--font-playfair-display), serif;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  
+  /* Subdued animated gradient background blending pinks, oranges and deep blues */
+  background: linear-gradient(135deg, var(--color-gogh-dark) 0%, #2b1f31 50%, #4a2135 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-vintage);
+}
+
+.romantic-text {
+  font-family: var(--font-romantic);
+  color: var(--color-her-pink);
+}
+
+.title-glow {
+  text-shadow: 0 0 10px rgba(255, 107, 129, 0.5), 0 0 20px rgba(255, 107, 129, 0.3);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-gogh-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-her-pink);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-her-red);
 }
