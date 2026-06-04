@@ -7,10 +7,17 @@ export default function ConfigForm({ config }: { config: any }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Converter data ISO para formato YYYY-MM-DDTHH:MM esperado pelo input datetime-local
-  const formattedDate = config?.unlock_date 
-    ? new Date(config.unlock_date).toISOString().slice(0, 16)
-    : "2026-06-05T00:00";
+  // Converter UTC para horário de Brasília manualmente
+  let formattedDate = "2026-06-05T00:00";
+  if (config?.unlock_date) {
+    try {
+      const d = new Date(config.unlock_date);
+      d.setUTCHours(d.getUTCHours() - 3);
+      formattedDate = d.toISOString().slice(0, 16);
+    } catch (e) {
+      formattedDate = "2026-06-05T00:00";
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

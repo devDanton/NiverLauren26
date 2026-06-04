@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 import styles from './MainAdventure.module.css';
 
 import LettersSection from './LettersSection';
@@ -99,8 +100,8 @@ export default function MainAdventure({ spotifyUrl, photos, letters }: MainAdven
                 style={{ transform: `rotate(${index % 2 === 0 ? 4 : -3}deg)` }}
                 onClick={() => setSelectedPhoto(photo.url)}
               >
-                <div className={styles.photoPlaceholder} style={{ background: 'transparent' }}>
-                  <img src={photo.url} alt="Moment" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '2px' }} />
+                <div className={styles.photoPlaceholder} style={{ background: 'transparent', position: 'relative' }}>
+                  <Image src={photo.url} alt="Moment" fill sizes="(max-width: 768px) 100vw, 300px" style={{ objectFit: 'cover', borderRadius: '2px' }} />
                 </div>
                 <p className={styles.caption}>Lembrança {index + 1}</p>
               </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { uploadPhotoAction, deletePhotoAction, deleteAllPhotosAction } from './PhotoManagerActions';
 
 export default function PhotoManager({ photos }: { photos: any[] }) {
@@ -164,7 +165,7 @@ export default function PhotoManager({ photos }: { photos: any[] }) {
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1rem' }}>
         {photos && photos.map((photo) => (
           <div key={photo.id} style={{ position: 'relative', width: '120px', height: '120px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #333', background: '#000' }}>
-            <img src={photo.url} alt="Uploaded" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <Image src={photo.url} alt="Uploaded" fill sizes="120px" style={{ objectFit: 'cover' }} />
             <button 
               onClick={() => handleDelete(photo.id)}
               style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(255,0,0,0.8)', color: 'white', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '12px' }}

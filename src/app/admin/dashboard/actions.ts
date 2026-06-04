@@ -12,8 +12,19 @@ export async function updateConfig(formData: FormData) {
     return { error: 'Campos obrigatórios faltando' };
   }
 
-  const dateObj = new Date(unlock_date);
-  const isoString = dateObj.toISOString();
+  let isoString;
+  try {
+    const [datePart, timePart] = unlock_date.split('T');
+    const [year, month, day] = datePart.split('-');
+    const [hour, minute] = timePart.split(':');
+    
+    // Create date in UTC assuming the input was already UTC, then add 3 hours to compensate for Brazil time
+    const d = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute)));
+    d.setUTCHours(d.getUTCHours() + 3);
+    isoString = d.toISOString();
+  } catch (e) {
+    isoString = new Date().toISOString();
+  }
 
   const { error } = await supabase
     .from('config')
