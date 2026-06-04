@@ -1,5 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
+import ConfigForm from './ConfigForm';
+import PhotoManager from './PhotoManager';
+import LetterManager from './LetterManager';
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -8,6 +12,25 @@ export default async function DashboardPage() {
   if (isAdmin?.value !== 'true') {
     redirect('/admin');
   }
+
+  // Fetch config
+  const { data: configData } = await supabase
+    .from('config')
+    .select('*')
+    .limit(1)
+    .single();
+
+  // Fetch photos
+  const { data: photosData } = await supabase
+    .from('photos')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  // Fetch letters
+  const { data: lettersData } = await supabase
+    .from('letters')
+    .select('*')
+    .order('created_at', { ascending: true });
 
   return (
     <div style={{ padding: '2rem', color: 'white', minHeight: '100vh', background: 'var(--color-background)' }}>
@@ -26,25 +49,20 @@ export default async function DashboardPage() {
       <section style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
         <div style={{ flex: '1', minWidth: '300px', background: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '8px' }}>
           <h2>Configurações Gerais</h2>
-          <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem' }}>Link do Spotify (Playlist)</label>
-              <input type="text" placeholder="https://open.spotify.com/playlist/..." style={{ width: '100%', padding: '0.5rem', background: '#0f141e', color: 'white', border: '1px solid #333' }} />
-            </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem' }}>Data do Aniversário</label>
-              <input type="datetime-local" defaultValue="2026-06-05T00:00" style={{ width: '100%', padding: '0.5rem', background: '#0f141e', color: 'white', border: '1px solid #333' }} />
-            </div>
-            <button style={{ background: 'var(--color-her-pink)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '4px', cursor: 'pointer' }}>Salvar Configurações</button>
-          </form>
+          <ConfigForm config={configData} />
         </div>
 
         <div style={{ flex: '2', minWidth: '300px', background: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '8px' }}>
           <h2>Gerenciador de Fotos</h2>
-          <div style={{ marginTop: '1rem', border: '2px dashed var(--color-her-pink)', padding: '2rem', textAlign: 'center', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255, 107, 129, 0.05)' }}>
-            <p>Arraste fotos aqui ou clique para fazer upload</p>
-            <p style={{ fontSize: '0.8rem', opacity: 0.7, marginTop: '0.5rem' }}>(O upload será conectado ao Supabase Storage)</p>
-          </div>
+          <PhotoManager photos={photosData || []} />
+        </div>
+      </section>
+
+      <section style={{ marginTop: '2rem' }}>
+        <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '8px' }}>
+          <h2>Cartas Surpresa</h2>
+          <p style={{ marginBottom: '1rem', opacity: 0.8 }}>Escreva mensagens de familiares, amigos e do amor da vida dela. Cada carta terá um envelope fechado com uma animação especial na tela pública.</p>
+          <LetterManager letters={lettersData || []} />
         </div>
       </section>
     </div>

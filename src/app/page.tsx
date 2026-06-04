@@ -1,26 +1,27 @@
-"use client";
+import { supabase } from '@/lib/supabase';
+import ClientHome from '@/components/ClientHome';
 
-import { useState } from 'react';
-import LockScreen from '@/components/LockScreen';
-import MainAdventure from '@/components/MainAdventure';
+export const revalidate = 0; // Desativa cache pesado para que as alterações no Admin reflitam na hora
 
-export default function Home() {
-  const [isLocked, setIsLocked] = useState(true);
+export default async function Home() {
+  const { data: config } = await supabase
+    .from('config')
+    .select('unlock_date, spotify_url')
+    .limit(1)
+    .single();
 
-  // Data do aniversário: 05/06/2026 meia-noite
-  const targetDateStr = "2026-06-05T00:00:00"; 
+  const { data: photos } = await supabase
+    .from('photos')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-  const handleUnlock = () => {
-    setIsLocked(false);
-  };
+  const { data: letters } = await supabase
+    .from('letters')
+    .select('*')
+    .order('created_at', { ascending: true });
 
-  return (
-    <main>
-      {isLocked ? (
-        <LockScreen onUnlock={handleUnlock} targetDateStr={targetDateStr} />
-      ) : (
-        <MainAdventure />
-      )}
-    </main>
-  );
+  const targetDateStr = config?.unlock_date || "2026-06-05T00:00:00Z";
+  const spotifyUrl = config?.spotify_url || "";
+
+  return <ClientHome targetDateStr={targetDateStr} spotifyUrl={spotifyUrl} photos={photos || []} letters={letters || []} />;
 }

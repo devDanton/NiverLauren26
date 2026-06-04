@@ -1,0 +1,234 @@
+.container {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.envelopesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+}
+
+.envelopeWrapper {
+  cursor: pointer;
+  perspective: 1000px;
+  transition: transform 0.3s;
+}
+
+.envelopeWrapper:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.envelope {
+  width: 280px;
+  height: 180px;
+  position: relative;
+  background: #e1d5c9;
+  border-radius: 4px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.envelopeFlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-top: 90px solid rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.envelopeSeal {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.envelopeText {
+  z-index: 1;
+  font-family: var(--font-romantic);
+  font-size: 1.6rem;
+  color: #333;
+  margin-top: 2rem;
+}
+
+/* Theme: Esposo */
+.envelopeEsposo .envelope { background: #ff4757; color: white; }
+.envelopeEsposo .envelopeText { color: white; }
+.envelopeEsposo .envelopeSeal { background: #ff6b81; border: 2px solid white; }
+
+/* Theme: Pais */
+.envelopePais .envelope { background: #eccc68; }
+.envelopePais .envelopeSeal { background: #ffa502; }
+
+/* Theme: Irmaos */
+.envelopeIrmaos .envelope { background: #7bed9f; }
+.envelopeIrmaos .envelopeSeal { background: #2ed573; }
+
+/* Theme: Avos */
+.envelopeAvos .envelope { background: #ced6e0; border: 1px dashed #747d8c; }
+.envelopeAvos .envelopeSeal { background: #8b4513; } 
+
+/* Theme: Amigos */
+.envelopeAmigos .envelope { background: #70a1ff; }
+.envelopeAmigos .envelopeSeal { background: #1e90ff; }
+
+
+/* Modal & Paper */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+  z-index: 100000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.letterPaper {
+  background: #fdfbf7;
+  color: #2f3542;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  padding: 3rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  position: relative;
+  overflow-y: auto;
+  font-family: var(--font-base);
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Animations & Paper Themes */
+.esposoPaper {
+  animation: floatUpHearts 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 4px solid #ff4757;
+}
+
+.paisPaper {
+  animation: slideUpWarm 0.6s ease-out;
+  border: 4px solid #eccc68;
+}
+
+.irmaosPaper {
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 4px solid #7bed9f;
+}
+
+.avosPaper {
+  animation: unfoldVintage 0.8s ease-in-out;
+  font-family: var(--font-romantic);
+  font-size: 1.4rem;
+  background: #f1e2c3;
+  border: 1px solid #dcdde1;
+}
+
+.amigosPaper {
+  animation: popConfetti 0.5s ease-out;
+  border: 4px solid #70a1ff;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.closeBtn:hover {
+  transform: scale(1.2);
+  color: var(--color-her-pink);
+}
+
+.letterHeader {
+  font-family: var(--font-romantic);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.letterContent {
+  white-space: pre-wrap;
+}
+
+.floatingHearts {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  animation: float 2s infinite alternate;
+}
+
+.confetti {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes floatUpHearts {
+  from { transform: translateY(50px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes slideUpWarm {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes unfoldVintage {
+  0% { transform: rotateX(-90deg); opacity: 0; }
+  100% { transform: rotateX(0deg); opacity: 1; }
+}
+
+@keyframes popConfetti {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  from { transform: translateX(-50%) translateY(0); }
+  to { transform: translateX(-50%) translateY(-10px); }
+}
