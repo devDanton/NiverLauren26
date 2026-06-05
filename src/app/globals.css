@@ -20,6 +20,7 @@
   --font-primary: var(--font-outfit), sans-serif;
   --font-romantic: var(--font-dancing-script), cursive;
   --font-vintage: var(--font-playfair-display), serif;
+  --font-wedding: var(--font-great-vibes), cursive;
 }
 
 * {

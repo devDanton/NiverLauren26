@@ -68,7 +68,7 @@ export default function LettersSection({ letters }: LettersSectionProps) {
 
       {openedLetter && mounted && createPortal(
         <div className={styles.modalOverlay} onClick={() => setOpenLetterId(null)}>
-          <div className={`${styles.letterPaper} ${getPaperClass(openedLetter.relationship)}`} onClick={e => e.stopPropagation()}>
+          <div className={`${styles.letterPaperContainer} ${getPaperClass(openedLetter.relationship)}`} onClick={e => e.stopPropagation()}>
             <button className={styles.closeBtn} onClick={() => setOpenLetterId(null)}>✕</button>
             
             {openedLetter.relationship === 'esposo' && <div className={styles.floatingHearts}>❤️❤️❤️</div>}

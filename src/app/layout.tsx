@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Dancing_Script, Playfair_Display } from "next/font/google";
+import { Outfit, Dancing_Script, Playfair_Display, Great_Vibes } from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -17,6 +17,12 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
 });
 
+const greatVibes = Great_Vibes({
+  weight: "400",
+  variable: "--font-great-vibes",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Aventura Surpresa da Lauren",
   description: "Feliz aniversário, meu amor!",
@@ -28,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${outfit.variable} ${dancingScript.variable} ${playfairDisplay.variable}`}>
+    <html lang="pt-BR" className={`${outfit.variable} ${dancingScript.variable} ${playfairDisplay.variable} ${greatVibes.variable}`}>
       <body>{children}</body>
     </html>
   );
