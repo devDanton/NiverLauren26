@@ -44,8 +44,8 @@ export default function LettersSection({ letters }: LettersSectionProps) {
 
   return (
     <div className={styles.container}>
-      <h2 className="romantic-text title-glow" style={{ fontSize: '4rem', marginBottom: '1rem', textAlign: 'center' }}>Mensagens Especiais</h2>
-      <p style={{ textAlign: 'center', marginBottom: '4rem', fontSize: '1.5rem', opacity: 0.9 }}>Algumas pessoas guardaram palavras preciosas para você...</p>
+      <h2 className={`romantic-text title-glow ${styles.sectionTitle}`}>Mensagens Especiais</h2>
+      <p className={styles.sectionSubtitle}>Algumas pessoas guardaram palavras preciosas para você...</p>
 
       <div className={styles.envelopesGrid}>
         {letters.map((letter) => (

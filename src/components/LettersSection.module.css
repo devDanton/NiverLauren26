@@ -11,6 +11,19 @@
   justify-content: center;
 }
 
+.sectionTitle {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 1.5rem;
+  opacity: 0.9;
+}
+
 .envelopeWrapper {
   cursor: pointer;
   perspective: 1000px;
@@ -114,7 +127,8 @@
   border-radius: 8px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
   position: relative;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-base);
   font-size: 1.2rem;
   line-height: 1.6;
@@ -177,6 +191,9 @@
 
 .letterContent {
   white-space: pre-wrap;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 0.5rem;
 }
 
 .floatingHearts {
@@ -256,5 +273,13 @@
     top: 0.5rem;
     right: 1rem;
     font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1.1rem;
   }
 }
