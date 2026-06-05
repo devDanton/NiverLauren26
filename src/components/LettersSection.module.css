@@ -186,6 +186,7 @@
   transform: translateX(-50%);
   font-size: 4rem;
   animation: float 2s infinite alternate;
+  white-space: nowrap;
 }
 
 .confetti {
@@ -194,6 +195,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 4rem;
+  white-space: nowrap;
 }
 
 @keyframes fadeIn {
@@ -231,4 +233,28 @@
 @keyframes float {
   from { transform: translateX(-50%) translateY(0); }
   to { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .letterPaper {
+    padding: 2.5rem 1.5rem;
+    width: 95%;
+  }
+
+  .floatingHearts, .confetti {
+    font-size: 2.5rem;
+    top: -15px;
+  }
+
+  .letterHeader {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .closeBtn {
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+  }
 }
